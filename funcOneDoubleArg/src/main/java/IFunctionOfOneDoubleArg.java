@@ -3,6 +3,6 @@
  */
 public interface IFunctionOfOneDoubleArg {
     double getFunctionValue(double x) throws OversteppingException;
-    void getLeftBoard(double a);
-    void getRightBoard(double b);
+    double getLeftBoard();
+    double getRightBoard();
 }

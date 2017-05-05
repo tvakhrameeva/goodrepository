@@ -7,9 +7,11 @@ public class LinearFunction implements IFunctionOfOneDoubleArg{
     private double left;
     private double right;
 
-    public LinearFunction(double a, double b) {
+    public LinearFunction(double a, double b,double left,double right) {
         this.a=a;
         this.b=b;
+        this.left=left;
+        this.right=right;
     }
 
 
@@ -19,11 +21,11 @@ public class LinearFunction implements IFunctionOfOneDoubleArg{
         else {throw new OversteppingException();}
     }
 
-    public void getLeftBoard(double m) {
-        left=m;
+    public double getLeftBoard() {
+        return left;
     }
 
-    public void getRightBoard(double n) {
-        right=n;
+    public double getRightBoard() {
+        return right;
     }
 }

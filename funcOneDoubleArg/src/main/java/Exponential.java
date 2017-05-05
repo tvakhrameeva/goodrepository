@@ -9,9 +9,11 @@ public class Exponential implements IFunctionOfOneDoubleArg {
     private double left;
     private double right;
 
-    public Exponential(double a,double b){
+    public Exponential(double a,double b,double left,double right){
         this.a=a;
         this.b=b;
+        this.left=left;
+        this.right=right;
     }
 
     public  double getFunctionValue(double x) throws  OversteppingException{
@@ -24,11 +26,11 @@ public class Exponential implements IFunctionOfOneDoubleArg {
 
     }
 
-    public void getLeftBoard(double m) {
-        left=m;
+    public double getLeftBoard() {
+        return left;
     }
 
-    public void getRightBoard(double n) {
-        right=n;
+    public double getRightBoard() {
+        return right;
     }
 }

@@ -8,17 +8,15 @@ import junit.framework.TestSuite;
 public class TestLinearFunction {
     @Test
     public void TestGetFunctionValue_normal() throws OversteppingException {
-        LinearFunction x1 = new LinearFunction(4,5);
-        x1.getLeftBoard(2);
-        x1.getRightBoard(5);
+        LinearFunction x1 = new LinearFunction(4,5,2,5);
+
 
         assertTrue( Math.abs(21-x1.getFunctionValue(4))< 0.0025);
     }
     @Test
     public void TestGetFunctionValue_outofboards() throws OversteppingException {
-        LinearFunction x2 = new LinearFunction(4,5);
-        x2.getLeftBoard(2);
-        x2.getRightBoard(5);
+        LinearFunction x2 = new LinearFunction(4,5,2,5);
+
 
         try{ x2.getFunctionValue(1);
             fail();

@@ -9,11 +9,13 @@ public class QuadraticFunction implements IFunctionOfOneDoubleArg {
     private double left;
     private double right;
 
-    public QuadraticFunction(double a, double b,double c,double d) {
+    public QuadraticFunction(double a, double b,double c,double d,double left,double right) {
         this.a=a;
         this.b=b;
         this.c=c;
         this.d=d;
+        this.left=left;
+        this.right=right;
 
     }
 
@@ -25,11 +27,11 @@ public class QuadraticFunction implements IFunctionOfOneDoubleArg {
 
     }
 
-    public void getLeftBoard(double m) {
-        left=m;
+    public double getLeftBoard() {
+        return left;
     }
 
-    public void getRightBoard(double n) {
-        right=n;
+    public double getRightBoard() {
+        return right;
     }
 }

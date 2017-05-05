@@ -9,17 +9,15 @@ import static junit.framework.Assert.fail;
 public class TestSinus {
     @Test
     public void TestGetFunctionValue_normal() throws OversteppingException {
-        Sinus x1 = new Sinus(4,5);
-        x1.getLeftBoard(2);
-        x1.getRightBoard(5);
+        Sinus x1 = new Sinus(4,5,2,5);
+
 
         assertTrue( Math.abs(3.6517810029-x1.getFunctionValue(4))< 0.0025);
     }
     @Test
     public void TestGetFunctionValue_outofboards() throws OversteppingException {
-        Sinus x2 = new Sinus(4,5);
-        x2.getLeftBoard(2);
-        x2.getRightBoard(5);
+        Sinus x2 = new Sinus(4,5,2,5);
+
 
         try{ x2.getFunctionValue(1);
             fail();
