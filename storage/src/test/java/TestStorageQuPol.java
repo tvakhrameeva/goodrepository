@@ -15,6 +15,7 @@ public class TestStorageQuPol {
         StorageQuPol equation1 = new StorageQuPol(1,2,1);
         assertTrue(equation1.solveEquation()[0] == -1);
         assertTrue(equation1.solveEquation()[1] == null);
+
     }
     @Test
     public void testSolveEquation_twoRoots() throws NoRouteException {
