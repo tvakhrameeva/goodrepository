@@ -1,13 +1,20 @@
+import java.io.Serializable;
+
 /**
  * Created by user on 5/12/17.
  */
-public class Human {
+public class Human implements Serializable{
     private String surname;
     private String name;
     private String secondName;
     private int age;
 
-    public Human(String surname,String name,String  secondName,int age){
+    @Override
+    protected Object clone() throws CloneNotSupportedException {
+        return super.clone();
+    }
+
+    public Human(String surname, String name, String  secondName, int age){
         this.surname=surname;
         this.name=name;
         this.secondName=secondName;

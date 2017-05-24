@@ -1,28 +1,23 @@
 
 
-import java.util.ArrayList;
-import java.util.Map;
-import java.util.Set;
+import java.io.Serializable;
+import java.util.*;
+
 
 /**
  * Created by user on 5/11/17.
  */
-public class ListDemo {
-    //private ArrayList<String> arrStr;
-    //private char sym;
+public class ListDemo implements Serializable{
 
-//    public ListDemo(ArrayList<String> arrStr, char sym){
-  //      this.arrStr =  arrStr;
-    //    this.sym = sym;
-    //}
 
     public static int findCountOfSimbolInStringList(ArrayList<String> arrStr, char sym){
-        int count=0;
-        for(int i =0; i < arrStr.size();i++){
-        if (arrStr.get(i).toString().charAt(0)==sym)
-        {count++;}
+        int count = 0;
+        for (int i = 0; i < arrStr.size(); i++) {
+            if (arrStr.get(i).charAt(0) == sym) {
+                count++;
+            }
         }
-     return count;
+        return count;
     }
 
     public static ArrayList<Human> findEqualSurname(ArrayList<Human> arrOfHuman, Human human){
@@ -34,28 +29,40 @@ public class ListDemo {
         }
         return result;
     }
-    public static ArrayList<Human> deleteEqualSurname(ArrayList<Human> arrOfHuman, Human human){
+    public static ArrayList<Human> deleteEqualSurname(ArrayList<Human> arrOfHuman, Human human) throws CloneNotSupportedException {
+       // ArrayList<Human> arrOfHuman1 = (ArrayList<Human>) arrOfHuman.clone();
+
+        ArrayList<Human> arrOfHuman1= org.apache.commons.lang3.SerializationUtils.clone(arrOfHuman);
         ArrayList<Human> result= new ArrayList<Human>();
-        for(int i=0;i<arrOfHuman.size();i++){
-            if( !arrOfHuman.get(i).equals(human) ){
-                result.add(arrOfHuman.get(i));
+      //  int i=0;
+        //for (Human anArrOfHuman1 : arrOfHuman1) {
+          //  anArrOfHuman1 = (Human) arrOfHuman.get(i).clone();
+
+        //}
+
+
+        for (Human anArrOfHuman1 : arrOfHuman1) {
+            if (!anArrOfHuman1.equals(human)) {
+                result.add(anArrOfHuman1);
             }
         }
         return result;
     }
-    public static ArrayList<int[]> findDisjointSets(ArrayList<int[]> arrOfInts, int[] set){
-        ArrayList<int[]> result= new ArrayList<int[]>();
+    public static List<Set<Integer>> findDisjointSets(List<Set<Integer>> arrOfInts, Set<Integer> set){
+        List<Set<Integer>> result= new ArrayList<Set<Integer>>();
+
         boolean fl=true;
         for(int i=0;i<arrOfInts.size();i++){
-            for (int j=0;j<arrOfInts.get(i).length;j++){
-                for (int k=0;k<set.length;k++) {
-                    if (arrOfInts.get(i)[j] == (set[k])) {
-                         fl= false;
-                        break;
+                for(int numOfArrOfInts : arrOfInts.get(i)) {
+                    for(int numOfSet : set) {
+                        if (numOfArrOfInts == (numOfSet)) {
+                            fl = false;
+                            break;
+                        }
                     }
                 }
-            }
-            if (fl==true){
+
+            if (fl){
                 result.add(arrOfInts.get(i));
             }
             fl=true;
@@ -63,18 +70,18 @@ public class ListDemo {
         return result;
     }
 
-    public static  ArrayList<Human> findHumanById(Map<Integer,Human> mapOfHuman, int[] set){
-        ArrayList<Human> result= new ArrayList<Human>();
-        for(int i=0;i<mapOfHuman.size();i++){
-            if( mapOfHuman.containsKey(set[i])){
-                result.add(mapOfHuman.get(set[i]));
+    public static  Set<Human> findHumanById(Map<Integer,Human> mapOfHuman, Set<Integer> set){
+        Set<Human> result= new HashSet<Human>();
+        for(int num :set){
+            if( mapOfHuman.containsKey(num)){
+                result.add(mapOfHuman.get(num));
             }
         }
         return result;
     }
-    public static ArrayList<Integer> findIdsHumansOlder18(Map<Integer,Human> mapOfHuman){
+    public static List<Integer> findIdsHumansOlder18(Map<Integer,Human> mapOfHuman){
         ArrayList<Integer> result = new ArrayList<Integer>();
-        Set keys = mapOfHuman.keySet();
+        Set<Integer> keys = mapOfHuman.keySet();
         for (Object key: keys) {
             if(mapOfHuman.get(key).getAge()>= 18){
                 result.add((Integer) key);
@@ -83,8 +90,8 @@ public class ListDemo {
         return result;
     }
 
-    public static ArrayList<Human> getTheOldestOnes(ArrayList<Human> human){
-        ArrayList result = new ArrayList();
+    public static List<Human> getTheOldestOnes(List<Human> human){
+        ArrayList<Human> result = new ArrayList<Human>();
         int maxAge = human.get(0).getAge();
         for(int i=1; i< human.size(); i++ ){
             if (human.get(i).getAge()> maxAge){
@@ -99,4 +106,5 @@ public class ListDemo {
 
         return  result;
     }
+
 }

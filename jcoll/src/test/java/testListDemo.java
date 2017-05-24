@@ -1,9 +1,8 @@
 import org.junit.Test;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 /**
@@ -45,7 +44,7 @@ public class testListDemo {
     }
 
     @Test
-    public void testDeleteEqualSurname()  {
+    public void testDeleteEqualSurname() throws CloneNotSupportedException {
         ArrayList<Human>  str= new ArrayList<Human>(4);
         Human human0 = new Human("ivanov","ivan","ivanovich",47);
         Human human1 = new Human("ivanov","ivan","ivanovich",20);
@@ -61,25 +60,51 @@ public class testListDemo {
         ans.add(0,human0);
         ans.add(1,human2);
         ans.add(2,human3);
-
+        ArrayList<Human> actualAns = ListDemo.deleteEqualSurname(str,human);
         assertTrue(ListDemo.deleteEqualSurname(str,human).equals(ans));
-
+        str.get(0).setName("test");
+        assertEquals("ivan", actualAns.get(0).getName());
     }
     @Test
     public void testfindDisjointSets()  {
-        ArrayList<int[]>  str= new ArrayList<int[]>(4);
-        int[] set0 = new int[]{1,2,3,4};
-        int[] set1 = new int[]{-1,0,7,4};
-        int[] set2 = new int[]{4,9,12,-8};
-        int[] set3 = new int[]{345,2333,333,14};
+        ArrayList<Set<Integer>>  str= new ArrayList<Set<Integer>>(4);
+        Set set0 = new HashSet();
+        set0.add(1);
+        set0.add(2);
+        set0.add(3);
+        set0.add(4);
+
+        Set set1 = new HashSet();
+
+        set1.add(-1);
+        set1.add(0);
+        set1.add(7);
+        set1.add(4);
+
+        Set set2 = new HashSet();
+        set2.add(4);
+        set2.add(9);
+        set2.add(12);
+        set2.add(-8);
+        Set set3 = new HashSet();
+
+        set3.add(345);
+        set3.add(2333);
+        set3.add(333);
+        set3.add(14);
 
         str.add(0,set0);
         str.add(1,set1);
         str.add(2,set2);
         str.add(3,set3);
 
-        int[] set = new int[]{2,-8,333,12};
-        ArrayList<int[]> ans= new ArrayList<int[]>(1);
+        Set<Integer> set = new HashSet<Integer>();
+        set.add(2);
+        set.add(-8);
+        set.add(333);
+        set.add(12);
+
+        ArrayList<Set<Integer>> ans= new ArrayList<Set<Integer>>(1);
         ans.add(0,set1);
 
 
@@ -100,18 +125,23 @@ public class testListDemo {
         str.add(3,human3);
 
         int[] ids = new int[]{0,1,2,3};
-        int[] set = new int[]{2,3,7,12};
+        Set<Integer> set = new HashSet();
+        set.add(2);
+        set.add(3);
+        set.add(7);
+        set.add(12);
+
         Map<Integer,Human> map = new HashMap<Integer, Human>();
         for(int j=0;j<str.size();j++) {
             map.put(ids[j], str.get(j));
         }
 
-        ArrayList<Human> ans= new ArrayList<Human>(2);
-        ans.add(0,human2);
-        ans.add(1,human3);
+        HashSet<Human> ans= new HashSet<Human>(2);
+        ans.add(human3);
+        ans.add(human2);
 
 
-        assertTrue(ListDemo.findHumanById(map,set).equals(ans));
+        assertEquals(ListDemo.findHumanById(map,set),ans);
 
     }
     @Test
@@ -134,6 +164,8 @@ public class testListDemo {
         ArrayList<Integer> ans= new ArrayList<Integer>(2);
         ans.add(0,0);
         ans.add(1,2);
+        ans.add(2,3);
+
 
         assertTrue(ListDemo.findIdsHumansOlder18(map).equals(ans));
     }
